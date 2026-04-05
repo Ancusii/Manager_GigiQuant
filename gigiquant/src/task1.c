@@ -1,4 +1,4 @@
-#include <task1h.h>
+#include "task1h.h"
 
 
 
@@ -21,9 +21,9 @@ int main(int argc, char **argv)
     p=cap;
     p->next=NULL;
 
-    creare_lista(&p,n);
+    creare_lista(&p,n,fi);
 
-
+    randament_mediu=rand_mediu(cap);
     randament_mediu/=(n-1);
 
     for(p=cap->next;p!=NULL;p=p->next)

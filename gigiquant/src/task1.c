@@ -1,17 +1,8 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-
-struct nod{
-    double val;
-    double randament;
-    struct nod *next;
-};
-
-typedef struct nod nod;
+#include <task1h.h>
 
 
-int main(int argc, char *argv[])
+
+int main(int argc, char **argv)
 {
     FILE *fi=fopen(argv[1],"r");
     FILE *fo=fopen(argv[2],"w");
@@ -20,7 +11,6 @@ int main(int argc, char *argv[])
     double randament_mediu=0;
     double volatil=0;
     double sharpe_ratio;
-   // double sum=0;
     int n; //numarul total de observatii
     
     fscanf(fi,"%d",&n);
@@ -31,19 +21,8 @@ int main(int argc, char *argv[])
     p=cap;
     p->next=NULL;
 
-    for(int i=2;i<=n;i++)
-    {
-        q=(nod*)malloc(sizeof(nod));
-        fscanf(fi,"%lf",&q->val);
-        q->randament=((q->val-p->val)/p->val);
+    creare_lista(&p,n);
 
-        randament_mediu+=q->randament;
-
-        p->next=q;
-        q->next=NULL;
-        p=q;
-
-    }
 
     randament_mediu/=(n-1);
 
@@ -55,18 +34,20 @@ int main(int argc, char *argv[])
     volatil=sqrt(volatil);
 
     sharpe_ratio=randament_mediu/volatil;
-    randament_mediu=(int)(randament_mediu*1000)/1000.;
+   /* randament_mediu=(int)(randament_mediu*1000)/1000.;
     volatil=(int)(volatil*1000)/1000.;
-    sharpe_ratio=(int)(sharpe_ratio*1000)/1000.;
-    
+    sharpe_ratio=(int)(sharpe_ratio*1000)/1000.; */
+
+   randament_mediu=calcul_zecimale(randament_mediu);   
+   volatil=calcul_zecimale(volatil);
+   sharpe_ratio=calcul_zecimale(sharpe_ratio);      
+
     fprintf(fo,"%.3lf\n",randament_mediu);
     fprintf(fo,"%.3lf\n",volatil);
     fprintf(fo,"%.3lf\n",sharpe_ratio);
 
     fclose(fi); fclose(fo);
 return 0;
-
-   
 
 
 

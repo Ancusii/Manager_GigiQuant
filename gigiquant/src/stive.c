@@ -1,19 +1,19 @@
-#include "stive.h"
+#include "stiveheader.h"
 
 void push(node **top, int v)
 {
-    node *newNode=(Node*)malloc(sizeof(node));
+    node *newNode=(node*)malloc(sizeof(node));
     newNode->val=v;
     newNode->next=*top;
     (*top)=newNode;
 }
 
-int pop(Node **top)
+int pop(node **top)
 {
     if(isEmpty(*top)) return INT_MIN;
     node *temp=*top;
     int aux=temp->val;
-    (*top)->(*top)->next;
+    (*top)=(*top)->next;
     free(temp);
     return aux;
 
@@ -44,39 +44,40 @@ queue *creareQueue()
 {
     queue *q;
     q=(queue*)malloc(sizeof(queue));
-    iff(q==NULL) return NULL;
+    if(q==NULL) return NULL;
     q->front=q->rear=NULL;
     return q;
 }
 
-void enQueue(queue *q, int val)
+void enQueue(queue *q, char *val)
 {
-    node *nod=(node*)malloc(sizeof(node));
-    nod->val=val;
-    nod->next=NULL;
-    if(q->rear==NULL) q->rear=nod;
+    node *node_coada=(node*)malloc(sizeof(node));
+    node_coada->val=malloc(strlen(val)+1);
+    strcpy(node_coada->val,val);
+    node_coada->next=NULL;
+    if(q->rear==NULL) q->rear=node_coada;
     else
     {
-        (q->rear)->next=nod;
-        (q->rear)=nod;
+        (q->rear)->next=node_coada;
+        (q->rear)=node_coada;
     }
     if(q->front==NULL) q->front=q->rear;
     
 }
 
-int isItEmpty(queue *q)
+int isItEmptyQ(queue *q)
 {
     return(q->front==NULL);
 }
 
-void deleteQueue(queue *q)
+void deleteQueue(queue *q,FILE *fo)
 {
-    node *aux;
-    while(!isItEmpty(q))
+    node_coada *aux;
+    while(!isItEmptyQ(q))
     {
-        aux->q->front;
+        aux=q->front;
         q->front=q->front->next;
-        //printf
+        fprintf(fo,"%s - ",aux->nume);
         free(aux);
     }
     free(q);

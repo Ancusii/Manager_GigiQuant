@@ -1,6 +1,7 @@
 #include "task1h.h"
 #include "task2h.h"
 #include "task3h.h"
+#include "task4h.h"
 
 
 
@@ -19,5 +20,9 @@ int main(int argc, char **argv)
     //TASK3
     else if(strstr(fisier_in,"data11.in")!=NULL||strstr(fisier_in,"data12.in")!=NULL||strstr(fisier_in,"data13.in")!=NULL||strstr(fisier_in,"data14.in")!=NULL||strstr(fisier_in,"data15.in")!=NULL)
     task3(argv[1],argv[2]);
+    else if(strstr(fisier_in,"data16.in")!=NULL||strstr(fisier_in,"data17.in")!=NULL||strstr(fisier_in,"data18.in")!=NULL||strstr(fisier_in,"data19.in")!=NULL||strstr(fisier_in,"data20.in")!=NULL)
+    task4(argv[1],argv[2]);
     return 0;
+    //TASK 4
+
 }

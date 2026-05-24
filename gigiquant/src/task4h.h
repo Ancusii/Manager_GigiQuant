@@ -14,10 +14,12 @@ struct graf{
     int V;
     int E;
     fractie **a;
+    int index_target,index_start;
 };
 
 typedef struct graf Graph;
 
 
 
-void task4(char *cale_in,char *out);
+void task4(const *cale_in,const *out);
+Graph *citire_date(FILE *fi,int *K);

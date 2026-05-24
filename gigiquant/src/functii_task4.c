@@ -52,10 +52,9 @@ Graph *citire_date(FILE *fi,int *K)
 }
 int cmmdc(int a,int b)
 {
-    int aux;
     while(b!=0)
     {
-        aux=b;
+        int aux=b;
         b=a%b;
         a=aux;
     }
@@ -78,9 +77,9 @@ fractie reducere_fractie(fractie fr)
 void Markov(Graph **g) //functie care transforma graful meu in markov
 {
     int i,j;
-    int numi;
     for(i=0;i<(*g)->V;i++)
-    {   numi=0;
+    {   
+        int numi=0;
         for(j=0;j<(*g)->V;j++)
         {
             if((*g)->a[i][j].numarator!=0)
@@ -105,17 +104,16 @@ void parcurgere_lant(Graph *g,int K,FILE *fo)
     int i=0,j;
     int cont=1;
     fractie P={0};
-    int numarator,numitor;
     prob_c=(fractie*)malloc(sizeof(fractie)*g->V);
     prob_urm=(fractie*)malloc(sizeof(fractie)*g->V);
+    
     for(i=0;i<g->V;i++)
     {prob_c[i].numarator=0;
     prob_c[i].numitor=1;
     }
+
     prob_c[g->index_start].numitor=1;
     prob_c[g->index_start].numarator=1;
-    
-    int tranz=0;
 
     while(cont<=K){
 
@@ -163,20 +161,33 @@ void parcurgere_lant(Graph *g,int K,FILE *fo)
     }
     cont++;
 
+    free(prob_c);
+    free(prob_urm);
+}
 }
     
+void free_graf(Graph *g)
+{
+    if(g==NULL) return;
+    //mai intai eliberez matricea;
+    for(int i=0;i<g->V;i++)
+    if(g->a[i]!=NULL) free(g->a[i]);
+    
+    free(g->a);
 
-
+    free(g);
 }
 
-void task4(char *cale_in,char *cale_out)
+
+
+void task4(const *cale_in,const *cale_out)
 {
     FILE *fi=fopen(cale_in,"rt"); //sa nu mai it de fopen
     FILE *fo=fopen(cale_out,"wt");
     int K;
     Graph *g=citire_date(fi,&K);
-    int i,j;
     Markov(&g);
 
     parcurgere_lant(g,K,fo);
+    free_graf(g);
 }

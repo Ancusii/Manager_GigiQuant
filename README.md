@@ -1,4 +1,4 @@
-Proiect Proiectarea Algoritmilor-Manager de portofoliu la GigiQuant
+Manager de portofoliu la GigiQuant
 
 Descrierea proiectului:
 
